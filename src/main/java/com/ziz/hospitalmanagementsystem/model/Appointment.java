@@ -15,7 +15,8 @@ public class Appointment {
     private LocalDate appointmentDate;
     private LocalTime appointmentTime;
     private String reason;
-    private String status; // e.g., Scheduled, Completed, Cancelled
+    @Enumerated(EnumType.STRING)
+    private AppointmentStatus status;// e.g., Scheduled, Completed, Cancelled
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
@@ -28,7 +29,7 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(Long id, LocalDate appointmentDate, LocalTime appointmentTime, String reason, String status, Patient patient, Doctor doctor) {
+    public Appointment(Long id, LocalDate appointmentDate, LocalTime appointmentTime, String reason, AppointmentStatus status, Patient patient, Doctor doctor) {
         this.id = id;
         this.appointmentDate = appointmentDate;
         this.appointmentTime = appointmentTime;
@@ -70,11 +71,11 @@ public class Appointment {
         this.reason = reason;
     }
 
-    public String getStatus() {
+    public AppointmentStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(AppointmentStatus status) {
         this.status = status;
     }
 

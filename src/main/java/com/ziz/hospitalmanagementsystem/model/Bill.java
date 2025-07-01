@@ -1,19 +1,25 @@
 package com.ziz.hospitalmanagementsystem.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "bills")
 public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Schema(description = "Total amount charged", example = "35000")
     private double amount;
 
-    private String status; // e.g. "PAID", "PENDING", "OVERDUE"
+    @Enumerated(EnumType.STRING)
+    private BillStatus status;// e.g. "PAID", "PENDING", "OVERDUE"
 
+
+    @Schema(description = "Date the bill was created", example = "2025-06-30")
     private LocalDate billingDate;
 
     @OneToOne
@@ -24,10 +30,11 @@ public class Bill {
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
+
     public Bill() {
     }
 
-    public Bill(Long id, double amount, String status, LocalDate billingDate, Appointment appointment, Patient patient) {
+    public Bill(Long id, double amount, BillStatus status, LocalDate billingDate, Appointment appointment, Patient patient) {
         this.id = id;
         this.amount = amount;
         this.status = status;
@@ -52,11 +59,11 @@ public class Bill {
         this.amount = amount;
     }
 
-    public String getStatus() {
+    public BillStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(BillStatus status) {
         this.status = status;
     }
 
@@ -82,5 +89,17 @@ public class Bill {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", status=" + status +
+                ", billingDate=" + billingDate +
+                ", appointment=" + appointment +
+                ", patient=" + patient +
+                '}';
     }
 }

@@ -1,6 +1,7 @@
 package com.ziz.hospitalmanagementsystem.repository;
 
 import com.ziz.hospitalmanagementsystem.model.Appointment;
+import com.ziz.hospitalmanagementsystem.model.AppointmentStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,5 +17,5 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
     List<Appointment> findByAppointmentDate(LocalDate date);
 
-    List<Appointment> findByStatus(String status);
+    List<Appointment> findByStatus(AppointmentStatus status);
 }
