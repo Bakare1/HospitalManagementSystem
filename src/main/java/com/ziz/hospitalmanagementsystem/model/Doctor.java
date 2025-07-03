@@ -1,10 +1,10 @@
 package com.ziz.hospitalmanagementsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "doctors")
-
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,10 +18,15 @@ public class Doctor {
 
     private boolean available; // for on-duty status
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Doctor() {
     }
 
-    public Doctor(Long id, String fullName, String specialization, String phoneNumber, String email, String officeNumber, boolean available) {
+    public Doctor(Long id, String fullName, String specialization, String phoneNumber, String email, String officeNumber, boolean available, User user) {
         this.id = id;
         this.fullName = fullName;
         this.specialization = specialization;
@@ -29,6 +34,15 @@ public class Doctor {
         this.email = email;
         this.officeNumber = officeNumber;
         this.available = available;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {

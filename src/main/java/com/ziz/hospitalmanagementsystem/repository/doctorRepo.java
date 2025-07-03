@@ -14,5 +14,7 @@ public interface doctorRepo extends JpaRepository<Doctor, Long> {
 
     List<Doctor> findByAvailableTrue();
 
+    Optional<Doctor> findByUser_Id(Long userId);
+
     Optional<Doctor> findByEmail(String email);
 }

@@ -17,7 +17,7 @@ public class PatientController {
     private PatientRepository repo;
 
     @Hidden
-    @RequestMapping("/")
+    @RequestMapping("/patients")
     public void redirect(HttpServletResponse response) throws IOException {
         response.sendRedirect("/swagger-ui/index.html");
     }
