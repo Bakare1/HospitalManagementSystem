@@ -30,6 +30,14 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
+                                "/register/**",           // ✅ doctor registration permitted
+                                "/login",
+                                "/logout",
+                                "/css/**", "/js/**", "/images/**" // optional: static assets
+                        ).permitAll()
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
                                 "/appointments",
                                 "/getAppointments",
                                 "/bookAppointment",
